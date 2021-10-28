@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/doctor_navigation"
+    app:startDestination="@id/navigation_doc_home">
+
+    <fragment
+        android:id="@+id/navigation_doc_home"
+        android:name="com.example.mybrain.ui.patients.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_doc_home"
+         />
+
+    <fragment
+        android:id="@+id/navigation_doc_dashboard"
+        android:name="com.example.mybrain.ui.doctors.DocDashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_doc_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_doc_setting"
+        android:name="com.example.mybrain.ui.doctors.DocSettingsFragment"
+        android:label="@string/person"
+        tools:layout="@layout/fragment_doc_settings"/>
+
+    <fragment
+        android:id="@+id/navigation_doc_notifications"
+        android:name="com.example.mybrain.ui.doctors.DocNotificationFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_doc_notification" />
+
+    <fragment
+        android:id="@+id/navigation_doc_search"
+        android:name="com.example.mybrain.ui.doctors.DocSearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_doc_search"/>
+
+</navigation>

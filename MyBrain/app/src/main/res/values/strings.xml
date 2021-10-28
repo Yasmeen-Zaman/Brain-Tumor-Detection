@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">MyBrain</string>
+    <string name="password">PASSWORD</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">login</string>
+    <string name="no_account">Don\'t you have an account?</string>
+    <string name="welcome_text">Welcome To BTDS</string>
+    <string name="continue_text">Login to continue</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="fill_info">Please fill the information</string>
+    <string name="create_account">Create Account</string>
+    <string name="full_name">FULL NAME</string>
+    <string name="phone">PHONE</string>
+    <string name="email">EMAIL</string>
+    <string name="confirm_password">CONFIRM PASSWORD</string>
+    <string name="AppText">Brain Tumor Detection System</string>
+    <string name="brain_alchemy">Brain Alchemy</string>
+    <string name="forgot_title">Forgot Password?</string>
+    <string name="account_email">Enter the email address associated with your account</string>
+    <string name="alert_user">Check your email, link has been sent to you.</string>
+    <string name="submit">Submit</string>
+    <string name="back">back</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="brain_logo">brain logo</string>
+    <string name="select_role">Select Role</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="first_name">FIRST NAME</string>
+    <string name="last_name">LAST NAME</string>
+    <string name="image_uri">image uri</string>
+    <string name="upload">Upload</string>
+    <string name="update">Update</string>
+    <string name="person">Profile</string>
+    <string name="write_something">Write Something</string>
+    <string name="username">USERNAME</string>
+    <string name="qualification">QUALIFICATION</string>
+    <string name="nic">CNIC</string>
+    <string name="gender">Gender</string>
+    <string name="profile">Profile</string>
+    <string name="title">Title</string>
+    <string name="doctor">Doctor</string>
+    <string name="role">ROLE</string>
+    <string name="status">Status</string>
+    <string name="reference">Reference ID</string>
+    <string name="specialization">SPECIALIZATION</string>
+    <string name="add">Add</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="roles">
+        <item>Select Role</item>
+        <item>Doctor</item>
+        <item>Patient</item>
+        <item>Admin</item>
+    </string-array>
+</resources>

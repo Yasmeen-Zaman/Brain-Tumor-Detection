@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "247865661385",
+    "project_id": "mybrain-c35b6",
+    "storage_bucket": "mybrain-c35b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247865661385:android:7f542d6b73d34897a53a18",
+        "android_client_info": {
+          "package_name": "com.example.mybrain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247865661385-f690ah5cqa9cl3avs6ghcj97opl4ijpr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQGM5sDpFNW2ox4B_NoqdMYaYfruqXTLc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247865661385-f690ah5cqa9cl3avs6ghcj97opl4ijpr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.patients.DashboardFragment">
+
+    <Button
+        android:id="@+id/uploadBtn"
+        android:layout_width="111dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/baumans"
+        android:text="@string/upload"
+        android:textColor="@color/browser_actions_bg_grey"
+        android:textSize="10sp"
+        app:backgroundTint="@color/custom_color_secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/brainImg" />
+
+    <ImageView
+        android:id="@+id/brainImg"
+        android:layout_width="249dp"
+        android:layout_height="167dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/title_dashboard"
+        android:src="@drawable/ic_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/baumans"
+        android:gravity="center"
+        android:text="Upload Your Brain MRI Image"
+        android:textColor="@color/custom_color_primary"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/brainTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baumans"
+        android:text="Tumor Type Detected is: "
+        android:textColor="@color/custom_color_primary"
+        android:textCursorDrawable="@color/custom_color_primary"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.376"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadBtn" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baumans"
+        android:text="None"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/brainTag"
+        app:layout_constraintTop_toBottomOf="@+id/uploadBtn" />
+
+<!--    <View-->
+<!--        android:id="@+id/view2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="3dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:background="@color/custom_color_primary"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/heading" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

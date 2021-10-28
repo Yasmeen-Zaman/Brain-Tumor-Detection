@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:id="@+id/img_prof"/>
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@+id/img_prof"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/img_prof"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/custom_color_text_primary"/>
+
+        <TextView
+            android:id="@+id/comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="5dp"
+            android:maxLines="5"
+            android:layout_toRightOf="@id/username"/>
+
+        <TextView
+            android:id="@+id/reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comments"
+            android:text="Reply"
+            android:textSize="16sp"
+            android:drawableEnd="@drawable/ic_reply"
+            android:drawableRight="@drawable/ic_reply" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

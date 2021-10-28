@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/custom_color_primary"
+    tools:context=".SignupActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_arrow"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:textSize="45sp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/baumans"
+            android:text="@string/create_account"
+            android:textColor="@color/custom_color_background"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="40dp"
+            android:text="@string/fill_info"
+            android:textColor="#A0A3A3"
+            android:textSize="15sp"
+            android:layout_marginStart="40dp" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear_bar"
+        android:layout_above="@id/linear_bottom">
+        <ScrollView
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/roleSpinner"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    app:endIconTint="@color/custom_color_background"
+                    app:boxBackgroundColor="@color/custom_color_primary"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/role"
+                        android:textColor="@color/custom_color_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/select_role"
+                        android:inputType="none"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/reference_id"
+                    android:hint="@string/reference"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_users"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/username"
+                    android:hint="@string/username"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/fullname"
+                    android:hint="@string/full_name"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/qualification"
+                    android:hint="@string/qualification"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_qualification"
+                    app:startIconTint="@color/custom_color_background"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/specialization"
+                    android:hint="@string/specialization"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:startIconTint="@color/custom_color_background"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/phone"
+                    android:hint="@string/phone"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_phone"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPhonetic"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:id="@+id/email"
+                    android:hint="@string/email"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    android:textColorHint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:startIconDrawable="@drawable/ic_email"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textCursorDrawable="@color/custom_color_background"
+                        android:textColor="@color/custom_color_background"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:hint="@string/password"
+                    android:textColorHint="@color/custom_color_background"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    app:counterTextColor="@color/custom_color_background"
+                    app:endIconTint="@color/custom_color_background"
+                    app:endIconMode="password_toggle"
+                    app:hintTextColor="@color/custom_color_background"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/custom_color_background"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textColor="@color/custom_color_background"
+                        android:textCursorDrawable="@color/custom_color_background" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confirmPass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:hint="@string/confirm_password"
+                    android:textColorHint="@color/custom_color_background"
+                    android:textSize="10sp"
+                    app:boxStrokeColor="@color/custom_color_background"
+                    app:counterTextColor="@color/custom_color_background"
+                    app:endIconTint="@color/custom_color_background"
+                    app:hintTextColor="@color/custom_color_background"
+                    app:passwordToggleEnabled="true"
+                    app:endIconMode="password_toggle"
+                    app:passwordToggleTint="@color/custom_color_background"
+                    app:startIconDrawable="@drawable/ic_lock"
+                    app:startIconTint="@color/custom_color_background">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textColor="@color/custom_color_background"
+                        android:textCursorDrawable="@color/custom_color_background" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:fontFamily="@font/baumans"
+            android:text="@string/sign_up"
+            android:textColor="@color/custom_color_background"
+            android:textSize="10sp"
+            app:backgroundTint="@color/custom_color_secondary" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baumans"
+                android:text="@string/already_have_account"
+                android:textColor="@color/custom_color_background"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/signinText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/have_account"
+                android:layout_toRightOf="@id/have_account"
+                android:fontFamily="@font/baumans"
+                android:text="@string/sign_in"
+                android:textColor="@color/custom_color_secondary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
