@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/custom_color_primary"
+    tools:context=".ForgotActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back"
+            android:tint="#979698"
+            android:onClick="BackToLogin"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:layout_width="159dp"
+            android:layout_height="190dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/forgot_password"
+            android:src="@drawable/key_pas" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baumans"
+            android:text="@string/forgot_title"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/baumans"
+                android:text="@string/account_email"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="258dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:hint="@string/email"
+                android:textColorHint="@color/custom_color_background"
+                android:textSize="12sp"
+                app:boxStrokeColor="@color/custom_color_background"
+                app:hintTextColor="@color/custom_color_background"
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="@color/custom_color_background">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/custom_color_background"
+                    android:textCursorDrawable="@color/custom_color_background" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/forget"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:textSize="10sp"
+                android:background="@drawable/button"
+                android:fontFamily="@font/baumans"
+                android:text="@string/submit"
+                android:onClick="SendResetPasswordEmail"
+                android:textColor="@color/custom_color_background"
+                app:backgroundTint="@color/custom_color_secondary"
+                android:layout_marginRight="20dp" />
+
+            <TextView
+                android:id="@+id/showText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/baumans"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MySessionsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/custom_color_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/close_session"
+                android:tint="@color/custom_color_primary"
+                android:src="@drawable/ic_close"
+                android:layout_margin="10dp"
+                android:onClick="CloseSessions"
+                android:contentDescription="@string/close_the_session_window"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/my_sessions"
+                android:textColor="@color/custom_color_primary"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/baumans"
+                android:layout_toRightOf="@id/close_session"/>
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_session_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_tool"/>
+
+
+</RelativeLayout>

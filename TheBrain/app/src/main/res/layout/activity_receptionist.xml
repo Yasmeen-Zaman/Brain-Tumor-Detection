@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReceptionistActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/custom_color_primary">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/receptionist_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/full_name"
+                    android:textStyle="bold"
+                    android:textColor="@color/custom_color_background"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@id/user_img"
+                    android:fontFamily="@font/baumans"
+                    android:layout_margin="10dp"
+                    android:layout_toEndOf="@id/user_img" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/receptionist_name"
+                    android:layout_toRightOf="@id/user_img"
+                    android:text="Receptionist"
+                    android:textColor="@color/custom_color_background"
+                    android:textStyle="normal"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/baumans"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@id/user_img" />
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/button"
+                    android:fontFamily="@font/baumans"
+                    android:text="@string/logout"
+                    android:textColor="@color/custom_color_background"
+                    android:textSize="10sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    app:backgroundTint="@color/custom_color_secondary"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/appbar">
+
+        <RelativeLayout
+            android:id="@+id/doctor_list"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/round_corner"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_list"
+                app:tint="@color/custom_color_background" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/custom_color_background"
+                android:text="View Doctors List"
+                android:gravity="center"
+                android:layout_below="@id/icon"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/patient_list"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/round_corner"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_toRightOf="@id/doctor_list"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/doctor_list">
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_list2"
+                app:tint="@color/custom_color_background" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/custom_color_background"
+                android:text="View Patients List"
+                android:gravity="center"
+                android:layout_below="@id/icon2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/doctor_add"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/round_corner"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/doctor_list"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_user"
+                app:tint="@color/custom_color_background" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/custom_color_background"
+                android:text="Add Doctors"
+                android:gravity="center"
+                android:layout_below="@id/icon4"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/patient_add"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/round_corner"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_below="@id/patient_list"
+            android:layout_toRightOf="@id/doctor_add"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/doctor_add">
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_user"
+                app:tint="@color/custom_color_background" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/custom_color_background"
+                android:text="Add Patient"
+                android:gravity="center"
+                android:layout_below="@id/icon3"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

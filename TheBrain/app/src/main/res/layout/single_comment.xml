@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:id="@+id/img_prof"/>
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@+id/img_prof"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/img_prof"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="@color/custom_color_text_primary"/>
+
+        <TextView
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_below="@id/username"
+            android:layout_marginTop="5dp"
+            android:maxLines="5"
+            android:textColor="@color/custom_color_text_primary" />
+
+        <LinearLayout
+            android:id="@+id/reply_ll"
+            android:layout_below="@id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    app:drawableTint="@color/custom_color_primary" />
+
+                <TextView
+                    android:id="@+id/reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reply"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="20dp"
+                    app:drawableTint="@color/custom_color_primary"
+                    android:layout_marginStart="20dp" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/view_reply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/reply_ll"
+            android:textSize="13sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reply_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/view_reply"/>
+    </RelativeLayout>
+</RelativeLayout>

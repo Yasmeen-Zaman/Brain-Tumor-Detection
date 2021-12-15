@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProfileActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/custom_color_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_close"
+                    android:contentDescription="@string/close_window" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="@string/edit_profile"
+                    android:textColor="@color/custom_color_primary"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginStart="40dp" />
+
+                <TextView
+                    android:id="@+id/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/custom_color_secondary"
+                    android:text="@string/save"
+                    android:textSize="16sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:id="@+id/change_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_photo"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/custom_color_secondary"
+                    android:textStyle="bold"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fname"
+                    android:hint="@string/first_name"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/last_name"
+                    android:hint="@string/last_name"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cnic"
+                    android:hint="@string/cnic"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/username"
+                    android:hint="@string/username"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/specialization"
+                    android:hint="@string/specialization"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gender"
+                    android:hint="@string/gender"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/age"
+                    android:hint="@string/age"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/city"
+                    android:hint="@string/city"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/street"
+                    android:hint="@string/street"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/email"
+                    android:hint="@string/email"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/phone"
+                    android:hint="@string/phone"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/qualification"
+                    android:hint="@string/qualification"
+                    app:met_floatingLabel="normal"/>
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/role"
+                    android:hint="@string/role"
+                    app:met_floatingLabel="normal"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
