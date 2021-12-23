@@ -68,6 +68,8 @@ public class MRIActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         add_image = findViewById(R.id.add);
 
+        result.setVisibility(View.GONE);
+
         // get service
         fileService = APIUtils.getFileService();
 
@@ -169,7 +171,7 @@ public class MRIActivity extends AppCompatActivity {
                             try {
                                 result.setVisibility(View.VISIBLE);
                                 String tumor= response.body().string().split(":")[1];
-                                result.setText("Tumor Type: "+tumor.replace("}", "").trim());
+                                result.setText("prediction Result: " + tumor.replace("}", "").trim());
                                 Toast.makeText(getApplicationContext(), "Tumor Type: "+tumor.replace("}", ""), Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 e.printStackTrace();

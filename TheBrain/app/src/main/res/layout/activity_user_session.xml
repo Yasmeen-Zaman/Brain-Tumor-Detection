@@ -74,8 +74,8 @@
             android:id="@+id/mri_image"
             android:layout_width="300dp"
             android:layout_height="230dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/no_image_uploadedpng"
             android:contentDescription="@string/add_mri_image"/>
 
         <RelativeLayout
@@ -115,7 +115,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_comment"
                 android:layout_toLeftOf="@id/add_image"
-                android:layout_toStartOf="@id/add_image" />
+                android:layout_toStartOf="@id/add_image"
+                android:contentDescription="@string/comments" />
 
             <ImageView
                 android:id="@+id/add_image"
@@ -124,7 +125,8 @@
                 android:src="@drawable/add_image"
                 app:tint="@color/custom_color_secondary"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/add_mri_image" />
 
         </RelativeLayout>
 

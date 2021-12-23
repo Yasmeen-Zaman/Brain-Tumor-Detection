@@ -34,10 +34,16 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     FirebaseUser mUser;
 
+    private RecordAdapter.OnItemsClickListener listener;
+
     public RecordAdapter(Context mContext, List<Session> mSessionList, String patient_id) {
         this.mContext = mContext;
         this.mSessionList = mSessionList;
         this.patient_id = patient_id;
+    }
+
+    public void setWhenClickListener(RecordAdapter.OnItemsClickListener listener){
+        this.listener = listener;
     }
 
     @NonNull
@@ -61,12 +67,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             holder.prediction_tag.setVisibility(View.GONE);
         }
 
-        holder.session_name.setOnClickListener(V->{
-            callUploadSession(patient_id, record.getKey());
-        });
+        holder.session_name.setOnClickListener(V-> callUploadSession(patient_id, record.getKey()));
 
         holder.delete_session.setOnClickListener(V->{
-            deleteSession(record.getKey(), patient_id);
+            if(listener!=null){
+                listener.onItemClick(record);
+            }
+//            deleteSession(record.getKey(), patient_id);
         });
     }
 
@@ -116,8 +123,12 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         });
     }
 
-    private void deleteSession(String session_id, String patient_id){
-        FirebaseDatabase.getInstance().getReference("users").child("Patient").child(patient_id).child("sessions").child(session_id).removeValue();
-        notifyDataSetChanged();
+//    private void deleteSession(String session_id, String patient_id){
+//        FirebaseDatabase.getInstance().getReference("users").child("Patient").child(patient_id).child("sessions").child(session_id).removeValue();
+//        notifyDataSetChanged();
+//    }
+
+    public interface OnItemsClickListener {
+        void onItemClick(Session record);
     }
 }

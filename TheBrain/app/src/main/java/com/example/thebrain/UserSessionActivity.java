@@ -102,6 +102,7 @@ public class UserSessionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_session);
+        ttl_cmt=0;
 
 // firebase authentication user and firebase storage
         mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -199,6 +200,8 @@ public class UserSessionActivity extends AppCompatActivity {
             parent_id = comment.getId();
             post_comment.setText("REPLY");
             comment_body.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(comment_body.getEditText(), InputMethodManager.SHOW_IMPLICIT);
         });
 
         // get service
@@ -324,6 +327,8 @@ public class UserSessionActivity extends AppCompatActivity {
         commentRef.child(last_key).setValue(commentHash).addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 Toast.makeText(UserSessionActivity.this, "Comment added!", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
             }
         });
         comment_rl.setVisibility(View.GONE);
@@ -359,6 +364,7 @@ public class UserSessionActivity extends AppCompatActivity {
                             result.setText("Pending");
                         }
                     } else {
+                        mriImage.setImageResource(R.drawable.no_image_uploadedpng);
                         tag.setText("No MRI Image Uploaded");
                         result.setText("");
                     }
@@ -479,12 +485,12 @@ public class UserSessionActivity extends AppCompatActivity {
                             } catch (IOException e) {
                                 e.printStackTrace();
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), "Server Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Server not responding", Toast.LENGTH_SHORT).show();
                             }
                         }
                     } else {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplicationContext(), "Server Error: "+response.errorBody(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Server not responding", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -498,7 +504,6 @@ public class UserSessionActivity extends AppCompatActivity {
     }
 
     private void ReadComments(String patient_id, String session_id){
-        ttl_cmt = 0;
         ProgressDialog progressDialog = new ProgressDialog(UserSessionActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();

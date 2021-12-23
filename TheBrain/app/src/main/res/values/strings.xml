@@ -71,4 +71,6 @@
     <string name="phoneno">Phone #:</string>
     <string name="emailId">Email:</string>
     <string name="user_data">User Data</string>
+    <string name="no_image">No MRI Uploaded</string>
+    <string name="tumor_detector">Brain Tumor Detector</string>
 </resources>

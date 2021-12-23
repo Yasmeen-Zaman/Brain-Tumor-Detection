@@ -95,7 +95,6 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.delete.setOnClickListener(v -> {
             FirebaseDatabase.getInstance().getReference("role-user").child(patient.getId()).removeValue();
             FirebaseDatabase.getInstance().getReference("users").child("Patient").child(patient.getId()).removeValue();
-
             Toast.makeText(mContext, "Patient deleted successfully", Toast.LENGTH_SHORT).show();
         });
 

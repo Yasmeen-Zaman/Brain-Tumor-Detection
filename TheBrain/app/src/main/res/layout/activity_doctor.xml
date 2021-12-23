@@ -128,11 +128,7 @@
                 android:id="@+id/img2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_centerHorizontal="true"
                 android:background="@color/custom_color_primary"
                 android:src="@drawable/ic_list2"
                 app:tint="@color/custom_color_background" />
@@ -140,8 +136,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/img2"
                 android:background="@color/custom_color_primary"
                 android:text="@string/view_my_patient_list"
@@ -163,11 +158,7 @@
                 android:id="@+id/img3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="40dp"
+                android:layout_centerHorizontal="true"
                 android:background="@color/custom_color_primary"
                 android:src="@drawable/ic_nic"
                 app:tint="@color/custom_color_background" />
@@ -175,8 +166,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/img3"
                 android:background="@color/custom_color_primary"
                 android:text="@string/view_profile"
@@ -202,11 +192,7 @@
                 android:id="@+id/img4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_centerHorizontal="true"
                 android:background="@color/custom_color_primary"
                 android:src="@drawable/brain"
                 app:tint="@color/custom_color_background" />
@@ -214,11 +200,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/img4"
                 android:background="@color/custom_color_primary"
-                android:text="@string/upload_mri_image"
+                android:text="@string/tumor_detector"
                 android:textColor="@color/custom_color_background"
                 android:textSize="15sp" />
 

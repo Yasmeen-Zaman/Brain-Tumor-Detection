@@ -2,7 +2,6 @@ package com.example.thebrain.dataAdapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,9 +71,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
             });
         }
 
-        holder.delete.setOnClickListener(V->{
-            deleteDoctor(doctor.getId(), doctor.getDoctor_reference_id());
-        });
+        holder.delete.setOnClickListener(V-> deleteDoctor(doctor.getId(), doctor.getDoctor_reference_id()));
 
     }
 

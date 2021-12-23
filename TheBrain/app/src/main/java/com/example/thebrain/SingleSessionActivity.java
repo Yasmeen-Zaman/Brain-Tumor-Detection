@@ -31,7 +31,6 @@ import com.example.thebrain.datamodels.Session;
 import com.example.thebrain.remote.APIUtils;
 import com.example.thebrain.remote.FileService;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -101,7 +100,7 @@ public class SingleSessionActivity extends AppCompatActivity {
 
     String patient_id, session_id, caller, username, userImage, last_key="0", parent_id;
     int tot_comments=0, comment_id=-1, pit_counter, man_counter, gli_counter;
-    int counter[];
+
     String flag;
 
     @Override
@@ -205,6 +204,8 @@ public class SingleSessionActivity extends AppCompatActivity {
             parent_id = comment.getId();
             comment_body.requestFocus();
             post_comment.setText("REPLY");
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(comment_body.getEditText(), InputMethodManager.SHOW_IMPLICIT);
         });
 
         if(tot_comments>0){
@@ -366,14 +367,11 @@ public class SingleSessionActivity extends AppCompatActivity {
         commentHash.put("parentId", "");
         commentHash.put("createdAt", date_time);
 
-        commentRef.child(last_key).setValue(commentHash).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(SingleSessionActivity.this, "Comment added!", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(getIntent());
-                }
+        commentRef.child(last_key).setValue(commentHash).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Toast.makeText(SingleSessionActivity.this, "Comment added!", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
             }
         });
         comment_rl.setVisibility(View.GONE);
@@ -406,6 +404,8 @@ public class SingleSessionActivity extends AppCompatActivity {
                     result.setText(session.getTag());
                 } else {
                     tag.setText("No MRI Uploaded");
+                    result.setText("");
+                    mriImage.setImageResource(R.drawable.no_image_uploadedpng);
                 }
             }
 
@@ -430,36 +430,33 @@ public class SingleSessionActivity extends AppCompatActivity {
                     throw task.getException();
                 }
                 return fileRef.getDownloadUrl();
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull @NotNull Task<Uri> task) {
-                    if(task.isSuccessful()){
-                        Uri downloadUri = task.getResult();
-                        mriUri = downloadUri.toString();
+            }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+                if(task.isSuccessful()){
+                    Uri downloadUri = task.getResult();
+                    mriUri = downloadUri.toString();
 
-                        DatabaseReference sessionRef = FirebaseDatabase.getInstance()
-                                .getReference("users")
-                                .child("Patient")
-                                .child(patient_id)
-                                .child("sessions")
-                                .child(session_id);
-                        HashMap<String, Object> sessionHash = new HashMap<>();
-                        sessionHash.put("mriImage", mriUri);
-                        sessionHash.put("tag", result.getText().toString());
-                        sessionRef.updateChildren(sessionHash);
+                    DatabaseReference sessionRef = FirebaseDatabase.getInstance()
+                            .getReference("users")
+                            .child("Patient")
+                            .child(patient_id)
+                            .child("sessions")
+                            .child(session_id);
+                    HashMap<String, Object> sessionHash = new HashMap<>();
+                    sessionHash.put("mriImage", mriUri);
+                    sessionHash.put("tag", result.getText().toString());
+                    sessionRef.updateChildren(sessionHash);
 
-                        DatabaseReference counterRef = FirebaseDatabase.getInstance().getReference("prediction-counters");
-                        HashMap<String, Object> counterHash = new HashMap<>();
-                        counterHash.put("glioma", gli_counter);
-                        counterHash.put("meningioma", man_counter);
-                        counterHash.put("pitutary", pit_counter);
-                        counterRef.updateChildren(counterHash);
+                    DatabaseReference counterRef = FirebaseDatabase.getInstance().getReference("prediction-counters");
+                    HashMap<String, Object> counterHash = new HashMap<>();
+                    counterHash.put("glioma", gli_counter);
+                    counterHash.put("meningioma", man_counter);
+                    counterHash.put("pitutary", pit_counter);
+                    counterRef.updateChildren(counterHash);
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Failed to upload", Toast.LENGTH_SHORT).show();
-                    }
-                    progressDialog.dismiss();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Failed to upload", Toast.LENGTH_SHORT).show();
                 }
+                progressDialog.dismiss();
             }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), " "+e.getMessage(), Toast.LENGTH_SHORT).show());
         } else{
             progressDialog.dismiss();

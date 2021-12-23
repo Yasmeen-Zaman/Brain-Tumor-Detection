@@ -72,7 +72,7 @@ public class UserListActivity extends AppCompatActivity {
             add_user.setVisibility(View.GONE);
         } else {
             add_user.setVisibility(View.VISIBLE);
-            add_user.setOnClickListener(V -> AddUser(role));
+            add_user.setOnClickListener(V -> AddUser(role, caller));
         }
 
         if(caller.equals("Doctor")){
@@ -90,9 +90,10 @@ public class UserListActivity extends AppCompatActivity {
         }
     }
 
-    private void AddUser(String role){
+    private void AddUser(String role, String caller){
         Intent addUserIntent = new Intent(UserListActivity.this, AddUserActivity.class);
         addUserIntent.putExtra("role", role);
+        addUserIntent.putExtra("caller", caller);
         startActivity(addUserIntent);
     }
 
@@ -108,8 +109,9 @@ public class UserListActivity extends AppCompatActivity {
                 mListDoctor.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Doctor doctor = dataSnapshot.getValue(Doctor.class);
-                    if (!doctor.getId().equals(mUser.getUid()))
+                    if (!doctor.getId().equals(mUser.getUid())) {
                         mListDoctor.add(doctor);
+                    }
                 }
                 mDoctorAdapter.notifyDataSetChanged();
             }

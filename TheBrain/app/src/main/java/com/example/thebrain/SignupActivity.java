@@ -1,35 +1,35 @@
 package com.example.thebrain;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.thebrain.datamodels.Doctor;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SignupActivity extends AppCompatActivity {
     TextInputLayout doctor_refer_id, userName, firstName, lastName, cnic, age, city, street, qualification, specialization, phone, email, password, rePassword;
@@ -38,6 +38,7 @@ public class SignupActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     ProgressDialog progressDialog;
+    boolean flag;
     String firstname, lastname, city_, street_, age_, gender_, cnicNo, qualif, specialize, email_ad, phone_no, password_user, role_user, username, doctor_ref_id;
 
     @Override
@@ -83,26 +84,18 @@ public class SignupActivity extends AppCompatActivity {
         //Set adapter
         gender.setAdapter(genderAdapter);
 
-        roles.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                role_user = parent.getItemAtPosition(position).toString();
-                if(role_user.equals("Doctor")){
-                    qualification.setVisibility(View.VISIBLE);
-                    specialization.setVisibility(View.VISIBLE);
-                } else {
-                    qualification.setVisibility(View.GONE);
-                    specialization.setVisibility(View.GONE);
-                }
+        roles.setOnItemClickListener((parent, view, position, id) -> {
+            role_user = parent.getItemAtPosition(position).toString();
+            if(role_user.equals("Doctor")){
+                qualification.setVisibility(View.VISIBLE);
+                specialization.setVisibility(View.VISIBLE);
+            } else {
+                qualification.setVisibility(View.GONE);
+                specialization.setVisibility(View.GONE);
             }
         });
 
-        gender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                gender_ = parent.getItemAtPosition(position).toString();
-            }
-        });
+        gender.setOnItemClickListener((parent, view, position, id) -> gender_ = parent.getItemAtPosition(position).toString());
     }
 
     public void SignUpUser(View view){
@@ -110,12 +103,7 @@ public class SignupActivity extends AppCompatActivity {
             AlertDialog.Builder builder =new AlertDialog.Builder(this);
             builder.setTitle("No internet Connection");
             builder.setMessage("Please turn on internet connection to continue");
-            builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+            builder.setNegativeButton("close", (dialog, which) -> dialog.dismiss());
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         }
@@ -143,13 +131,19 @@ public class SignupActivity extends AppCompatActivity {
         if(role_user.equals("Doctor")){
             RegisterDoctor(doctor_ref_id, username, firstname, lastname, city_, street_, age_, gender_ , cnicNo, qualif, specialize, email_ad, phone_no, password_user, role_user);
         } else if(role_user.equals("Patient")){
-            RegisterPatient(doctor_ref_id, username, firstname, lastname, city_, street_, age_, gender_ , cnicNo, email_ad, phone_no, password_user, role_user);;
+            RegisterPatient(doctor_ref_id, username, firstname, lastname, city_, street_, age_, gender_ , cnicNo, email_ad, phone_no, password_user, role_user);
         } else {
             Toast.makeText(SignupActivity.this, "Please select valid role!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void RegisterDoctor(String doctor_ref_id, String username, String firstname, String lastname, String city_, String street_, String age_, String gender_, String cnicNo, String qualif, String specialize, String email_ad, String phone_no, String password_user, String role_user) {
+
+        // may remove this later
+        if(!checkReferenceId()){
+            progressDialog.dismiss();
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email_ad, password_user).addOnCompleteListener(SignupActivity.this, task -> {
             if (task.isComplete()){
                 mUser = mAuth.getCurrentUser();
@@ -177,7 +171,7 @@ public class SignupActivity extends AppCompatActivity {
                 docHashMap.put("password", password_user);
                 docHashMap.put("image", "https://firebasestorage.googleapis.com/v0/b/mybrain-c35b6.appspot.com/o/images%2Fdoctor.png?alt=media&token=be2e94a8-3668-41f8-b433-0a6c2211e75a");
 
-                reference.setValue(docHashMap).addOnCompleteListener(task1 -> {
+                reference.child("Doctor").child(mUser.getUid()).setValue(docHashMap).addOnCompleteListener(task1 -> {
                     if(task1.isComplete()){
                         Intent goToProfile = new Intent(SignupActivity.this, DoctorActivity.class);
                         goToProfile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -193,6 +187,13 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void RegisterPatient(String doctor_ref_id, String username, String firstname, String lastname, String city_, String street_, String age_, String gender_, String cnicNo, String email_ad, String phone_no, String password_user, String role_user) {
+
+        // may remove this later
+        if(!validateReferenceIdForPatient()){
+            progressDialog.dismiss();
+            return;
+        }
+
         mAuth.createUserWithEmailAndPassword(email_ad, password_user).addOnCompleteListener(SignupActivity.this, task -> {
             if (task.isComplete()){
                 mUser = mAuth.getCurrentUser();
@@ -216,11 +217,11 @@ public class SignupActivity extends AppCompatActivity {
                 docHashMap.put("phone", phone_no);
                 docHashMap.put("role", role_user);
                 docHashMap.put("password", password_user);
-                docHashMap.put("image", "https://firebasestorage.googleapis.com/v0/b/mybrain-c35b6.appspot.com/o/images%2Fdoctor.png?alt=media&token=be2e94a8-3668-41f8-b433-0a6c2211e75a");
+                docHashMap.put("image", "https://firebasestorage.googleapis.com/v0/b/mybrain-c35b6.appspot.com/o/images%2Fpatient.png?alt=media&token=6a741a79-3fe3-4e06-aaf9-6c1ade98adc2");
 
-                reference.setValue(docHashMap).addOnCompleteListener(task1 -> {
+                reference.child("Patient").child(mUser.getUid()).setValue(docHashMap).addOnCompleteListener(task1 -> {
                     if(task1.isComplete()){
-                        Intent goToProfile = new Intent(SignupActivity.this, DoctorActivity.class);
+                        Intent goToProfile = new Intent(SignupActivity.this, PatientActivity.class);
                         goToProfile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         goToProfile.putExtra("role", role_user);
                         goToProfile.putExtra("id", mUser.getUid());
@@ -231,6 +232,44 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean checkReferenceId(){
+        String val = doctor_refer_id.getEditText().getText().toString();
+        if(val.isEmpty()){
+            doctor_refer_id.setError("Field cannot be empty");
+            return false;
+        } else {
+            DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("users").child("Doctor");
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Doctor doctor = dataSnapshot.getValue(Doctor.class);
+                            if (doctor.getDoctor_reference_id().equals(val)) {
+                                flag = true;
+                            } else {
+                                flag = false;
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+            if(flag){
+                doctor_refer_id.setError(null);
+                doctor_refer_id.setErrorEnabled(false);
+                return true;
+            } else {
+                doctor_refer_id.setError("Reference Id already taken");
+                return false;
+            }
+        }
     }
 
     public void backToLogin(View view){
@@ -333,20 +372,21 @@ public class SignupActivity extends AppCompatActivity {
         if(val.isEmpty()){
             cnic.setError("Field cannot be empty");
             return false;
-        } else if(val.matches(nicPattern)){
+        } else if(val.matches(nicPattern) && val.length()==13){
             email.setError(null);
             email.setErrorEnabled(false);
             return true;
         }else {
             cnic.setError("Invalid NIC pattern");
-            cnic.setErrorEnabled(false);
-            return true;
+            cnic.setErrorEnabled(true);
+            return false;
         }
 
     }
 
     private Boolean validateReferenceId(){
         String val = doctor_refer_id.getEditText().getText().toString();
+
         if(val.isEmpty()){
             doctor_refer_id.setError("Field cannot be empty");
             return false;
@@ -354,6 +394,45 @@ public class SignupActivity extends AppCompatActivity {
             doctor_refer_id.setError(null);
             doctor_refer_id.setErrorEnabled(false);
             return true;
+        }
+
+    }
+
+    private Boolean validateReferenceIdForPatient(){
+        String val = doctor_refer_id.getEditText().getText().toString();
+        if(val.isEmpty()){
+            flag=false;
+            doctor_refer_id.setError("Field cannot be empty");
+            return false;
+        } else {
+            DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("users").child("Doctor");
+            mRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            Doctor doctor = dataSnapshot.getValue(Doctor.class);
+                            if (!doctor.getDoctor_reference_id().equals(val)) {
+                                flag = true;
+                            } else {
+                                flag = false;
+                            }
+                        }
+                        if(flag){
+                            doctor_refer_id.setError(null);
+                            doctor_refer_id.setErrorEnabled(false);
+                        } else {
+                            doctor_refer_id.setError("No doctor with this reference id");
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+            return flag;
         }
 
     }
@@ -370,7 +449,7 @@ public class SignupActivity extends AppCompatActivity {
             return true;
         } else {
             email.setError("Invalid email address!");
-            email.setErrorEnabled(false);
+            email.setErrorEnabled(true);
             return false;
         }
 
@@ -378,7 +457,6 @@ public class SignupActivity extends AppCompatActivity {
 
     private Boolean validatePhone(){
         String val = phone.getEditText().getText().toString().trim();
-
 
         if(val.isEmpty()){
             phone.setError("Field cannot be empty");

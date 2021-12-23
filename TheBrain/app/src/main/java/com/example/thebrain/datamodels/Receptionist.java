@@ -1,13 +1,13 @@
 package com.example.thebrain.datamodels;
 
 public class Receptionist {
-    String id, username, firstname, lastname, gender, age, city, street, email, phone, role, status;
+    String id, username, firstname, lastname, gender, age, city, street, email, phone, role;
     String image;
 
     public Receptionist() {
     }
 
-    public Receptionist(String id, String username, String firstname, String lastname, String gender, String age, String city, String street, String email, String phone, String role, String status, String image) {
+    public Receptionist(String id, String username, String firstname, String lastname, String gender, String age, String city, String street, String email, String phone, String role, String image) {
         this.id =id;
         this.username = username;
         this.firstname = firstname;
@@ -19,7 +19,6 @@ public class Receptionist {
         this.email = email;
         this.phone = phone;
         this.role = role;
-        this.status = status;
         this.image= image;
 
     }
@@ -38,14 +37,6 @@ public class Receptionist {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getImage() {

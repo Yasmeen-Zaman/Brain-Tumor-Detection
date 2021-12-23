@@ -21,7 +21,8 @@
                 android:src="@drawable/ic_close"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:contentDescription="@string/close_window"/>
 
             <TextView
                 android:text="@string/upload_mri"
@@ -58,11 +59,13 @@
         android:layout_gravity="center"
         android:layout_below="@id/ll"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:src="@drawable/no_image_uploadedpng"
+        android:contentDescription="@string/add_mri_image"/>
 
     <TextView
         android:id="@+id/result"
-        android:text="@string/prediction_result"
+        android:text="@string/no_image"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -73,6 +76,4 @@
         android:fontFamily="@font/baumans"
         android:gravity="center"
         android:layout_centerHorizontal="true"/>
-
-
 </RelativeLayout>

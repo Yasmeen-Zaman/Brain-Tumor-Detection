@@ -27,13 +27,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout email, password;
     Button login;
     TextView signup, forgot;
     ProgressDialog progressDialog;
 
-    DatabaseReference roleRef;
+    DatabaseReference roleRef, reference;
     FirebaseAuth mAuth;
 
     @Override
@@ -80,36 +82,48 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
                                 String role = snapshot.child("role").getValue(String.class);
-                                switch (role) {
-                                    case "Patient":
-                                        Intent PatientIntent = new Intent(LoginActivity.this, PatientActivity.class);
-                                        PatientIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        PatientIntent.putExtra("id", mUser.getUid());
-                                        PatientIntent.putExtra("role", "Patient");
-                                        startActivity(PatientIntent);
-                                        finish();
+
+                                reference = FirebaseDatabase.getInstance().getReference("users").child(role).child(mUser.getUid());
+                                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                        if(snapshot.exists()){
+                                            switch (role) {
+                                                case "Patient":
+                                                    Intent PatientIntent = new Intent(LoginActivity.this, PatientActivity.class);
+                                                    PatientIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(PatientIntent);
+                                                    finish();
+                                                    progressDialog.dismiss();
+                                                    break;
+                                                case "Doctor":
+                                                    Intent DoctorIntent = new Intent(LoginActivity.this, DoctorActivity.class);
+                                                    DoctorIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(DoctorIntent);
+                                                    finish();
+                                                    progressDialog.dismiss();
+                                                    break;
+                                                case "Receptionist":
+                                                    Intent ReceptionistIntent = new Intent(LoginActivity.this, ReceptionistActivity.class);
+                                                    ReceptionistIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(ReceptionistIntent);
+                                                    finish();
+                                                    progressDialog.dismiss();
+                                                    break;
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
                                         progressDialog.dismiss();
-                                        break;
-                                    case "Doctor":
-                                        Intent DoctorIntent = new Intent(LoginActivity.this, DoctorActivity.class);
-                                        DoctorIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        DoctorIntent.putExtra("id", mUser.getUid());
-                                        DoctorIntent.putExtra("role", "Patient");
-                                        startActivity(DoctorIntent);
-                                        finish();
-                                        progressDialog.dismiss();
-                                        break;
-                                    case "Receptionist":
-                                        Intent ReceptionistIntent = new Intent(LoginActivity.this, ReceptionistActivity.class);
-                                        ReceptionistIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        ReceptionistIntent.putExtra("id", mUser.getUid());
-                                        ReceptionistIntent.putExtra("role", "Patient");
-                                        startActivity(ReceptionistIntent);
-                                        finish();
-                                        progressDialog.dismiss();
-                                        break;
-                                }
+                                    }
+                                });
+
+
                             } else {
+                                email.getEditText().setText("");
+                                password.getEditText().setText("");
                                 Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
@@ -122,6 +136,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 } else {
+                    email.getEditText().setText("");
+                    password.getEditText().setText("");
                     progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Incorrect username or password!", Toast.LENGTH_SHORT).show();
                 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.thebrain.dataAdapter.DoctorAdapter;
 import com.example.thebrain.dataAdapter.ReferAdapter;
 import com.example.thebrain.datamodels.Doctor;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,9 +64,8 @@ public class ReferCaseActivity extends AppCompatActivity {
 
         mDoctorList = new ArrayList<>();
         mReferAdapter = new ReferAdapter(ReferCaseActivity.this, mDoctorList, patient_id, doctor_id);
-
         doctor_rv.setAdapter(mReferAdapter);
-
+        mReference = FirebaseDatabase.getInstance().getReference("users").child("Doctor");
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

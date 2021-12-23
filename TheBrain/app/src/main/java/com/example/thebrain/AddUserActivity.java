@@ -17,15 +17,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thebrain.datamodels.Doctor;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddUserActivity extends AppCompatActivity {
@@ -38,7 +45,7 @@ public class AddUserActivity extends AppCompatActivity {
     AutoCompleteTextView gender;
 
     String role, ref_id, username, firstname, lastname, city_, street_, age_, gender_, cnicNo, qualify, specialize, phone_, email_, password_;
-
+    String caller;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     DatabaseReference mDbRef, roleRef;
@@ -51,6 +58,7 @@ public class AddUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_user);
 
         mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
 
         close = findViewById(R.id.close);
         title_bar = findViewById(R.id.title_bar);
@@ -75,18 +83,35 @@ public class AddUserActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         role = getIntent().getStringExtra("role");
-        if(role.equals("Doctor")){
-            progressDialog.setTitle("Adding Doctor");
-            title_bar.setText("Add Doctor");
-            add.setText("Add Doctor");
-            specialization.setVisibility(View.VISIBLE);
-            qualification.setVisibility(View.VISIBLE);
-        } else if(role.equals("Patient")){
-            progressDialog.setTitle("Adding Patient");
-            title_bar.setText("Add Patient");
-            add.setText("Add Patient");
-            specialization.setVisibility(View.GONE);
-            qualification.setVisibility(View.GONE);
+        caller = getIntent().getStringExtra("caller");
+
+        if(caller.equals("Receptionist")) {
+            if (role.equals("Doctor")) {
+                progressDialog.setTitle("Adding Doctor");
+                title_bar.setText("Add Doctor");
+                add.setText("Add Doctor");
+                specialization.setVisibility(View.VISIBLE);
+                qualification.setVisibility(View.VISIBLE);
+            } else if (role.equals("Patient")) {
+                progressDialog.setTitle("Adding Patient");
+                title_bar.setText("Add Patient");
+                add.setText("Add Patient");
+                specialization.setVisibility(View.GONE);
+                qualification.setVisibility(View.GONE);
+            }
+        } else if(caller.equals("Doctor")){
+            if (role.equals("Patient")) {
+                progressDialog.setTitle("Adding Patient");
+                title_bar.setText("Add Patient");
+                add.setText("Add Patient");
+                specialization.setVisibility(View.GONE);
+                qualification.setVisibility(View.GONE);
+                fetchReferenceId(mUser.getUid());
+            }
+            doctor_refer_id.setLongClickable(false);
+            doctor_refer_id.setFocusable(false);
+            doctor_refer_id.setClickable(false);
+            userName.requestFocus();
         }
 
         ArrayList<String> genderList = getGender();
@@ -142,6 +167,24 @@ public class AddUserActivity extends AppCompatActivity {
         });
     }
 
+    private void fetchReferenceId(String user_id){
+        DatabaseReference mRef = FirebaseDatabase.getInstance().getReference("users").child("Doctor").child(user_id);
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Doctor doctor = snapshot.getValue(Doctor.class);
+                    doctor_refer_id.getEditText().setText(doctor.getDoctor_reference_id());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void registerUser(String ref_id, String username, String firstname, String lastname, String city, String street, String age, String gender, String cnicNo, String email_, String role, String phone_, String password_, String qualify, String specialize){
         mAuth.createUserWithEmailAndPassword(email_, password_).addOnCompleteListener(AddUserActivity.this, task -> {
             if (task.isSuccessful()) {
@@ -181,8 +224,6 @@ public class AddUserActivity extends AppCompatActivity {
 
                 progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "User successfully added", Toast.LENGTH_SHORT).show();
-
-//                    sendRegistrationEmail(email_, fullname, password_);
 
             }
         }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
@@ -364,7 +405,6 @@ public class AddUserActivity extends AppCompatActivity {
 //            return true;
         } else if(val.length()<6){
             password.setError("Password length should no be less than 6");
-//            password.setError("Password must contain at least: \n1 Capital Character (A-Z), \n1 Special Character (@!#$%^&+=) and \nNumber (0-9)!\nLength should no be less than 6");
             return false;
         } else {
             password.setError(null);

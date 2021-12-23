@@ -66,6 +66,7 @@
             android:id="@+id/img_mri"
             android:layout_width="300dp"
             android:layout_height="230dp"
+            android:src="@drawable/no_image_uploadedpng"
             android:layout_centerHorizontal="true"/>
 
         <TextView

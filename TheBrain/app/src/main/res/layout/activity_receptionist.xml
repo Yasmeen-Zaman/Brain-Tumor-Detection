@@ -10,7 +10,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/custom_color_primary">
+        android:background="@color/custom_color_background">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/full_name"
                     android:textStyle="bold"
-                    android:textColor="@color/custom_color_background"
+                    android:textColor="@color/custom_color_primary"
                     android:textSize="20sp"
                     android:layout_toRightOf="@id/user_img"
                     android:fontFamily="@font/baumans"
@@ -46,7 +46,7 @@
                     android:layout_below="@id/receptionist_name"
                     android:layout_toRightOf="@id/user_img"
                     android:text="Receptionist"
-                    android:textColor="@color/custom_color_background"
+                    android:textColor="@color/custom_color_primary"
                     android:textStyle="normal"
                     android:textSize="17sp"
                     android:fontFamily="@font/baumans"

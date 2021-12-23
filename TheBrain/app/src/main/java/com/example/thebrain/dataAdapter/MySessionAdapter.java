@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.thebrain.R;
@@ -19,7 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -65,9 +63,7 @@ public class MySessionAdapter extends RecyclerView.Adapter<MySessionAdapter.View
             holder.prediction_tag.setVisibility(View.GONE);
         }
 
-        holder.session_name.setOnClickListener(V->{
-            callUploadSession(patient_id, session.getKey());
-        });
+        holder.session_name.setOnClickListener(V-> callUploadSession(patient_id, session.getKey()));
 
     }
 

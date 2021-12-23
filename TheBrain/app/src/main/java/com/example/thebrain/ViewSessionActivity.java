@@ -86,6 +86,8 @@ public class ViewSessionActivity extends AppCompatActivity {
             createSession();
         });
 
+        recordAdapter.setWhenClickListener(record -> deleteSession(record.getKey(), patient_id));
+
         readSessions();
 
     }
@@ -152,6 +154,13 @@ public class ViewSessionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void deleteSession(String session_id, String patient_id){
+        FirebaseDatabase.getInstance().getReference("users").child("Patient").child(patient_id).child("sessions").child(session_id).removeValue();
+        recordAdapter.notifyDataSetChanged();
+        finish();
+        startActivity(getIntent());
     }
 
     private boolean isInternetAvailable(){
